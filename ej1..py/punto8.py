@@ -133,3 +133,7 @@ for i in range(3):
 
 print("Numeros pares:",ContadorPares)
 print("Numeros impares:",ContadorImpares)
+PilaAOrdenar=input()
+
+PilaOrdenada = Ordenar(PilasPalos[PilaAOrdenar])
+print('\nPila del palo {} ordenada:\n{}'.format(PilaAOrdenar,PilaOrdenada))
