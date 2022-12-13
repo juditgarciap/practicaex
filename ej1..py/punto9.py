@@ -98,3 +98,5 @@ print('\n 3) Seleccione la pila que quiere ordenar')
 for i in PilasPalos:
     print('---> {}'.format(i))
 PilaAOrdenar=input()
+PilaOrdenada = Ordenar(PilasPalos[PilaAOrdenar])
+print('\nPila del palo {} ordenada:\n{}'.format(PilaAOrdenar,PilaOrdenada))
