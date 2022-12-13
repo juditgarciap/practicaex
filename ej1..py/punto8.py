@@ -63,4 +63,73 @@ def remplazar(raiz):
         raiz.der, aux = remplazar(raiz.der)
     return raiz, aux
 
-    
+    #elimina un nodo del arbol
+def eliminar_nodo(raiz,clave):
+    x = None
+    if( raiz is not None):
+        if(clave < raiz.info):
+            raiz.izq, x = eliminar_nodo(raiz.izq, clave)
+        elif(clave > raiz.info):
+            raiz.der, x = eliminar_nodo(raiz.der,clave)
+        else:
+            x = raiz.info
+            if(raiz.izq is None):
+                raiz = raiz.der
+            elif(raiz.der is None):
+                raiz = raiz.izq
+            else:
+                raiz.izq, aux = remplazar(raiz.izq)
+                raiz.info = aux.info
+    return raiz, x
+
+#verifica si un numero es par o impar
+def EsPar(numero):
+    if(numero%2):
+        return False
+    else:
+        return True
+#Genera un arbol con 1000 numeros aleatorios enteros en el rango [0-1000]
+CantidadNumeros=1000
+NumeroAleatorio = random.randint(0,CantidadNumeros)
+Arbol = nodoArbol(NumeroAleatorio)
+ContadorPares=0
+ContadorImpares=0
+for i in range(CantidadNumeros-1):
+    NumeroAleatorio = random.randint(0,CantidadNumeros)
+    #Lleva un conteo de los numeros aleatorios pares o impares
+    if(EsPar(NumeroAleatorio)):
+        ContadorImpares += 1
+    else:
+        ContadorPares += 1
+    Arbol = insertar_nodo(Arbol, NumeroAleatorio)
+
+#selecciona el tipo de despligue del arbol
+print("Despliegue [1]Preorden [2]Inorden [3]Postorden: ")
+Despliegue = int(input())
+if(Despliegue==1):
+    preorden(Arbol)
+elif(Despliegue==2):
+    inorden(Arbol)
+elif(Despliegue==3):
+    postorden(Arbol)
+else:
+    print("Orden no encontrada")
+
+#Busca un numero n si se encuentra en el arbol o no
+print("Buscar numero entero en el rango [0-1000]: ")
+NumeroBuscar = int(input())
+NumeroBuscado = buscar(Arbol,NumeroBuscar)
+if(NumeroBuscado is not None):
+    print('Numero {} se encuentra en el arbol'.format(NumeroBuscado))
+else:
+    print('Numero {} no se encuentra en el arbol'.format(NumeroBuscado))
+
+#Elimina 3 valores del arbol
+print("\nElimine 3 numeros del arbol")
+for i in range(3):
+    print('Eliminacion #{}:'.format(i+1))
+    NumeroEliminar = int(input())
+    eliminar_nodo(Arbol,NumeroEliminar)
+
+print("Numeros pares:",ContadorPares)
+print("Numeros impares:",ContadorImpares)
